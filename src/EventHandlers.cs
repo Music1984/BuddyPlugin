@@ -45,9 +45,13 @@ namespace Buddy
 
         private IEnumerator<float> SendBroadcast(Player p)
         {
+            Log.Debug("waiting");
             yield return Timing.WaitForSeconds(2f);
+            Log.Debug("checking");
+            Log.Debug($"waiting{!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast}");
             if (!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast)
             {
+                Log.Debug("check succesful");
                 p.Broadcast(5, Buddy.singleton.Config.GetLang("useBuddyCommandBroadcast"), Broadcast.BroadcastFlags.Normal);
             }
             if (Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendBuddyBroadcast)
