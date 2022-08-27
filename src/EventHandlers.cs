@@ -14,7 +14,7 @@ namespace Buddy
         private readonly RoleType[] scpRoles = { RoleType.Scp049, RoleType.Scp079, RoleType.Scp096, RoleType.Scp106, RoleType.Scp173, RoleType.Scp93953, RoleType.Scp93989 };
         private readonly Random rnd = new Random();
 
-        public void OnPlayerJoin(JoinedEventArgs ev)
+        public void OnVerified(VerifiedEventArgs ev)
         {
             Timing.RunCoroutine(SendJoinMessage(ev.Player));
             Timing.RunCoroutine(SendBroadcast(ev.Player));
@@ -23,9 +23,12 @@ namespace Buddy
         public IEnumerator<float> SendJoinMessage(Player p)
         {
             yield return Timing.WaitForSeconds(1f);
+            if (p.UserId == null)
+                yield break;
             if (!Buddy.singleton.buddies.ContainsKey(p.UserId))
             {
                 p.ShowHint(Buddy.singleton.Config.GetLang("BuddyMessage"), 7.5f);
+                p.SendConsoleMessage(Buddy.singleton.Config.GetLang("BuddyMessage"), "yellow");
             }
             else
             {
@@ -39,19 +42,21 @@ namespace Buddy
                     Player player = Player.Get(buddy1);
                     if (player == null) yield break;
                     p.ShowHint(Buddy.singleton.Config.GetLang("broadcastBuddy").Replace("$buddy", player.Nickname), 7.5f);
+                    p.SendConsoleMessage(Buddy.singleton.Config.GetLang("broadcastBuddy").Replace("$buddy", player.Nickname), "yellow");
                 }
             }
         }
 
         private IEnumerator<float> SendBroadcast(Player p)
         {
-            Log.Debug("waiting");
             yield return Timing.WaitForSeconds(2f);
-            Log.Debug("checking");
-            Log.Debug($"waiting{!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast}");
+            if (p.UserId == null)
+            {
+                yield break;
+            }
+            Log.Warn($"waiting{!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast}");
             if (!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast)
             {
-                Log.Debug("check succesful");
                 p.Broadcast(5, Buddy.singleton.Config.GetLang("useBuddyCommandBroadcast"), Broadcast.BroadcastFlags.Normal);
             }
             if (Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendBuddyBroadcast)

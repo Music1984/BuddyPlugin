@@ -22,7 +22,7 @@ namespace Buddy
         public override void OnDisabled()
         {
             Exiled.Events.Handlers.Server.RoundStarted -= EventHandlers.OnRoundStart;
-            Exiled.Events.Handlers.Player.Joined -= EventHandlers.OnPlayerJoin;
+            Exiled.Events.Handlers.Player.Verified -= EventHandlers.OnVerified;
             Exiled.Events.Handlers.Server.RestartingRound -= EventHandlers.OnRoundRestart;
             Exiled.Events.Handlers.Server.ReloadedConfigs -= Config.OnReload;
 
@@ -37,7 +37,7 @@ namespace Buddy
 
             EventHandlers = new EventHandlers();
             Exiled.Events.Handlers.Server.RoundStarted += EventHandlers.OnRoundStart;
-            Exiled.Events.Handlers.Player.Joined += EventHandlers.OnPlayerJoin;
+            Exiled.Events.Handlers.Player.Verified += EventHandlers.OnVerified;
             Exiled.Events.Handlers.Server.RestartingRound += EventHandlers.OnRoundRestart;
             Exiled.Events.Handlers.Server.ReloadedConfigs += Config.OnReload;
 

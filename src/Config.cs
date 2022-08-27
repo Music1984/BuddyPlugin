@@ -48,7 +48,7 @@ namespace Buddy
             { "successMessage", "Success! Type $unBuddyCMD to get rid of your buddy."},
             { "invalidUsage", "Usage: $buddyCMD <friend's name>"},
             { "unBuddySuccess", "You no longer have a buddy."},
-            { "useBuddyCommandBroadcast", "If you want to play on the same team as a friend, open up your console with the ~ key."},
+            { "useBuddyCommandBroadcast", "If you want to play on the same team as a friend, open up your console with the ~ key. (.buddy <name>)"},
             { "broadcastBuddy", "Your buddy is $buddy."},
             { "broadcastBuddyRequest", "$name wants to play with you. Open the console with ~ to accept their request."},
         };
