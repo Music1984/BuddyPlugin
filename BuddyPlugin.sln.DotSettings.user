@@ -13,6 +13,9 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\nt251645\RiderProjects\BuddyPlugin\packages\EXILED.5.3.0-rc.1\lib\net472\CommandSystem.Core.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\nt251645\Desktop\CommandSystem.Core.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\natha\Desktop\Buddy-master\src\bin\Release\Assembly-CSharp-firstpass.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\natha\Desktop\Buddy-master\packages\EXILED.5.3.0\lib\net472\Assembly-CSharp-Publicized.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\natha\Desktop\Buddy-master\packages\EXILED.5.3.0\lib\net472\NorthwoodLib.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">C:\Program Files\JetBrains\JetBrains Rider 2022.2.2\tools\MSBuild\Current\Bin\MSBuild.exe</s:String>
 	<s:Int64 x:Key="/Default/Environment/Hierarchy/Build/BuildTool/MsbuildVersion/@EntryValue">1114112</s:Int64>
