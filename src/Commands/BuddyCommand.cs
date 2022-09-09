@@ -50,13 +50,17 @@ namespace Buddy
             foreach (Player player in Player.List)
             {
                 if (player == null) continue;
+                if (player.Nickname.ToLower().Contains(lower) && player.SessionVariables.ContainsKey("IsNPC"))
+                {
+                    return "Cannot buddy with NPCs.";
+                }
                 if (player.Nickname.ToLower().Contains(lower) && player.UserId != p.UserId)
                 {
                     buddy = player;
                     break;
                 }
             }
-            if (buddy == null)
+            if (buddy == null || buddy.SessionVariables.ContainsKey("IsNPC"))
             {
                 return Buddy.singleton.Config.GetLang("playerNotFoundMessage");
             }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Exiled.API;
 using System.Linq;
 using Exiled.API.Enums;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Buddy
 {
@@ -54,7 +56,6 @@ namespace Buddy
             {
                 yield break;
             }
-            Log.Warn($"waiting{!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast}");
             if (!Buddy.singleton.buddies.ContainsKey(p.UserId) && Buddy.singleton.Config.SendInfoBroadcast)
             {
                 p.Broadcast(5, Buddy.singleton.Config.GetLang("useBuddyCommandBroadcast"), Broadcast.BroadcastFlags.Normal);
@@ -113,7 +114,7 @@ namespace Buddy
                 Player player = Player.Get(id);
                 if (player == null) continue;
                 //check if player has a buddy
-                if (Buddy.singleton.buddies.ContainsKey(player.UserId))
+                if (Buddy.singleton.buddies.ContainsKey(player.UserId) && !player.SessionVariables.ContainsKey("IsNPC"))
                 {
                     try
                     {
@@ -154,6 +155,7 @@ namespace Buddy
                                 foreach (Player hub in Player.List)
                                 {
                                     Player player1 = hub;
+                                    if (player.SessionVariables.ContainsKey("IsNPC")) continue;
                                     //check if the player is an scp
                                     if (player1.UserId != id && player1.UserId != buddy1 && !Buddy.singleton.buddies.ContainsKey(player1.UserId) && player1.Role.Team == Team.SCP)
                                     {
